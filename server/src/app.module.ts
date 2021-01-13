@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.entity';
+import { Exchange } from './exchanges/exchange.entity';
+import { ExchangesModule } from './exchanges/exchanges.module';
 
 @Module({
   imports: [
@@ -12,10 +14,11 @@ import { User } from './users/user.entity';
       username: 'cesco',
       password: 'database',
       database: 'BorrowLend',
-      entities: [User],
+      entities: [User, Exchange],
       synchronize: true,
     }),
     UsersModule,
+    ExchangesModule,
   ],
   controllers: [],
   providers: [],

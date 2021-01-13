@@ -13,9 +13,10 @@ export class UsersService {
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user = new User();
-    user.firstName = createUserDto.firstName;
-    user.lastName = createUserDto.lastName;
-
+    user.username = createUserDto.username;
+    user.password = createUserDto.password;
+    user.location = createUserDto.location;
+    user.email = createUserDto.email;
     return this.usersRepository.save(user);
   }
 
@@ -23,11 +24,11 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User> {
+  findOne(id: number): Promise<User> {
     return this.usersRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
 }

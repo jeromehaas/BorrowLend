@@ -18,12 +18,14 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<User> {
+  findOne(@Param('id') id: number): Promise<User> {
+    id = Number(id);
     return this.usersService.findOne(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id') id: number): Promise<void> {
+    id = Number(id);
     return this.usersService.remove(id);
   }
 }

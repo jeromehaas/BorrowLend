@@ -1,16 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Exchange } from '../exchanges/exchange.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
-  firstName: string;
+  public username: string;
 
   @Column()
-  lastName: string;
+  public password: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column()
+  public location: string;
+
+  @Column()
+  public email: string;
+
+  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.userBorrowing)
+  public exchangesBorr: Exchange[];
+
+  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.userLending)
+  public exchangesLend: Exchange[];
 }
