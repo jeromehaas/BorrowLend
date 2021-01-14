@@ -43,4 +43,27 @@ export class ExchangesService {
   async remove(id: number): Promise<void> {
     await this.exchangesRepository.delete(id);
   }
+
+  async accept(id: number): Promise<Exchanges> {
+    return this.exchangesRepository.save({
+      id,
+      accepted: true,
+    });
+  }
+
+  reject(id: number): Promise<Exchanges> {
+    return this.exchangesRepository.save({
+      id,
+      accepted: false,
+    });
+  }
+
+  async end(id: number, userId: number): Promise<Exchanges> {
+    const exchange = await this.exchangesRepository.findOne(id, {
+      relations: ['userBorrowing', 'userLending', 'itemBorrowed', 'itemLent'],
+    });
+    if (exchange.userBorrowing.id === userId) exchange.isActiveBorr = false;
+    if (exchange.userLending.id === userId) exchange.isActiveLend = false;
+    return this.exchangesRepository.save(exchange);
+  }
 }

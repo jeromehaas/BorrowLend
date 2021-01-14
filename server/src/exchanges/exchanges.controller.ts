@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreateExchangeDto } from './dto/create-exchange.dto';
 import { Exchanges } from './exchange.entity';
 import { ExchangesService } from './exchanges.service';
@@ -27,5 +35,27 @@ export class ExchangesController {
   remove(@Param('id') id: number): Promise<void> {
     id = Number(id);
     return this.exchangesService.remove(id);
+  }
+
+  @Put('accept/:id')
+  accept(@Param('id') id: number): Promise<Exchanges> {
+    id = Number(id);
+    return this.exchangesService.accept(id);
+  }
+
+  @Put('reject/:id')
+  reject(@Param('id') id: number): Promise<Exchanges> {
+    id = Number(id);
+    return this.exchangesService.reject(id);
+  }
+
+  @Put('end/:id/:userId')
+  end(
+    @Param('id') id: number,
+    @Param('userId') userId: number,
+  ): Promise<Exchanges> {
+    id = Number(id);
+    userId = Number(userId);
+    return this.exchangesService.end(id, userId);
   }
 }
