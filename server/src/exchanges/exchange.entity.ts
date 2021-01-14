@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { User } from '../users/user.entity';
-import { Item } from '../items/item.entity';
+import { Users } from '../users/user.entity';
+import { Items } from '../items/item.entity';
 
 @Entity()
-export class Exchange {
+export class Exchanges {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -16,15 +16,15 @@ export class Exchange {
   @Column({ nullable: true })
   public isActiveLend: boolean;
 
-  @ManyToOne(() => User, (userBorrowing: User) => userBorrowing.exchangesBorr)
-  public userBorrowing: User;
+  @ManyToOne(() => Users, (userBorrowing: Users) => userBorrowing.exchangesBorr)
+  public userBorrowing: Users;
 
-  @ManyToOne(() => User, (userLending: User) => userLending.exchangesLend)
-  public userLending: User;
+  @ManyToOne(() => Users, (userLending: Users) => userLending.exchangesLend)
+  public userLending: Users;
 
-  @ManyToOne(() => Item, (itemBorrowed: Item) => itemBorrowed.exchangesBorr)
-  public itemBorrowed: Item;
+  @ManyToOne(() => Items, (itemBorrowed: Items) => itemBorrowed.exchangesBorr)
+  public itemBorrowed: Items;
 
-  @ManyToOne(() => Item, (itemLent: Item) => itemLent.exchangesLend)
-  public itemLent: Item;
+  @ManyToOne(() => Items, (itemLent: Items) => itemLent.exchangesLend)
+  public itemLent: Items;
 }

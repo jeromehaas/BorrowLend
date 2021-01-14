@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './user.entity';
+import { Users } from './user.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    @InjectRepository(Users)
+    private readonly usersRepository: Repository<Users>,
   ) {}
 
-  create(createUserDto: CreateUserDto): Promise<User> {
-    const user = new User();
+  create(createUserDto: CreateUserDto): Promise<Users> {
+    const user = new Users();
     user.username = createUserDto.username;
     user.password = createUserDto.password;
     user.location = createUserDto.location;
@@ -20,13 +20,13 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<Users[]> {
     return this.usersRepository.find({
       relations: ['exchangesBorr', 'exchangesLend'],
     });
   }
 
-  findOne(id: number): Promise<User> {
+  findOne(id: number): Promise<Users> {
     return this.usersRepository.findOne(id, {
       relations: ['exchangesBorr', 'exchangesLend'],
     });

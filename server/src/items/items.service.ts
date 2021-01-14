@@ -2,29 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateItemDto } from './dto/create-item.dto';
-import { Item } from './item.entity';
+import { Items } from './item.entity';
 
 @Injectable()
 export class ItemsService {
   constructor(
-    @InjectRepository(Item)
-    private readonly itemsRepository: Repository<Item>,
+    @InjectRepository(Items)
+    private readonly itemsRepository: Repository<Items>,
   ) {}
 
-  create(createItemDto: CreateItemDto): Promise<Item> {
-    const item = new Item();
+  create(createItemDto: CreateItemDto): Promise<Items> {
+    const item = new Items();
     item.title = createItemDto.title;
     item.img = createItemDto.img;
     return this.itemsRepository.save(item);
   }
 
-  async findAll(): Promise<Item[]> {
+  async findAll(): Promise<Items[]> {
     return this.itemsRepository.find({
       relations: ['exchangesBorr', 'exchangesLend'],
     });
   }
 
-  findOne(id: number): Promise<Item> {
+  findOne(id: number): Promise<Items> {
     return this.itemsRepository.findOne(id, {
       relations: ['exchangesBorr', 'exchangesLend'],
     });

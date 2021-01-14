@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Exchange } from '../exchanges/exchange.entity';
+import { Exchanges } from '../exchanges/exchange.entity';
 
 @Entity()
-export class User {
+export class Users {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -18,9 +18,9 @@ export class User {
   @Column()
   public email: string;
 
-  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.userBorrowing)
-  public exchangesBorr: Exchange[];
+  @OneToMany(() => Exchanges, (exchange: Exchanges) => exchange.userBorrowing)
+  public exchangesBorr: Exchanges[];
 
-  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.userLending)
-  public exchangesLend: Exchange[];
+  @OneToMany(() => Exchanges, (exchange: Exchanges) => exchange.userLending)
+  public exchangesLend: Exchanges[];
 }

@@ -1,8 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Exchange } from '../exchanges/exchange.entity';
+import { Exchanges } from '../exchanges/exchange.entity';
 
 @Entity()
-export class Item {
+export class Items {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -12,9 +12,9 @@ export class Item {
   @Column()
   public img: string;
 
-  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.itemBorrowed)
-  public exchangesBorr: Exchange[];
+  @OneToMany(() => Exchanges, (exchange: Exchanges) => exchange.itemBorrowed)
+  public exchangesBorr: Exchanges[];
 
-  @OneToMany(() => Exchange, (exchange: Exchange) => exchange.itemLent)
-  public exchangesLend: Exchange[];
+  @OneToMany(() => Exchanges, (exchange: Exchanges) => exchange.itemLent)
+  public exchangesLend: Exchanges[];
 }
