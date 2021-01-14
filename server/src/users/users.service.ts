@@ -44,6 +44,20 @@ export class UsersService {
     });
   }
 
+  async findByUsername(username: string): Promise<Users> {
+    return this.usersRepository.findOne(
+      { username: username },
+      {
+        relations: [
+          'exchangesBorr',
+          'exchangesLend',
+          'toLendList',
+          'toBorrowList',
+        ],
+      },
+    );
+  }
+
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }

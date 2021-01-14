@@ -31,6 +31,11 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Get('username/:username')
+  findByUsername(@Param('username') username: string): Promise<Users> {
+    return this.usersService.findByUsername(username);
+  }
+
   @Get('lending/:itemId')
   findUsersLendingItem(@Param('itemId') itemId: number): Promise<Users[]> {
     itemId = Number(itemId);
