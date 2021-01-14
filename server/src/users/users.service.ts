@@ -100,4 +100,19 @@ export class UsersService {
 
     return this.usersRepository.save(user);
   }
+
+  async findUsersLendingItem(itemId: number): Promise<Users[]> {
+    let users = await this.usersRepository.find({
+      relations: [
+        'exchangesBorr',
+        'exchangesLend',
+        'toLendList',
+        'toBorrowList',
+      ],
+    });
+    users = users.filter(
+      (user) => user.toLendList.findIndex((item) => item.id === itemId) !== -1,
+    );
+    return users;
+  }
 }
