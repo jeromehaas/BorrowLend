@@ -1,6 +1,6 @@
 export class CreateExchangeDto {
   userBorrowingId: number;
   userLendingId: number;
-  itemToBorrowId: number;
-  itemToLendId: number;
+  itemBorrowedId: number;
+  itemLentId: number;
 }

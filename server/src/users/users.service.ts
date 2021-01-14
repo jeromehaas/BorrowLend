@@ -21,11 +21,15 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+    return this.usersRepository.find({
+      relations: ['exchangesBorr', 'exchangesLend'],
+    });
   }
 
   findOne(id: number): Promise<User> {
-    return this.usersRepository.findOne(id);
+    return this.usersRepository.findOne(id, {
+      relations: ['exchangesBorr', 'exchangesLend'],
+    });
   }
 
   async remove(id: number): Promise<void> {
