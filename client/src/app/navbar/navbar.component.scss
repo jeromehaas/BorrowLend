@@ -29,6 +29,10 @@
       &:hover {
         border-bottom: 1px solid $color-primary;
       }
+      &:active {
+        border-bottom: 1px solid $color-primary;
+        transform: translateY(0.2rem);
+      }
     }
   }
 }

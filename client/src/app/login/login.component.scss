@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .form {
-  padding: 10rem;
+  padding: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +28,14 @@
       background-color: $color-primary;
       border-radius: 3px;
       padding: 1rem;
+      cursor: pointer;
+      &:hover {
+        box-shadow: 0 0.8rem 1rem rgba($color-black, 0.2);
+      }
+      &:active {
+        transform: translateY(0.2rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+      }
     }
   }
 }

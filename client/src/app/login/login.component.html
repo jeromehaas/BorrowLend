@@ -1,11 +1,16 @@
-<form class="form">
+<form
+  class="form"
+  #userlogin="ngForm"
+  (ngSubmit)="onClickSubmit(userlogin.value); userlogin.reset()"
+>
   <div class="form__group">
     <label for="userName">Username</label>
     <input
       id="userName"
       type="text"
-      class="form-control"
+      name="userName"
       placeholder="Enter your username"
+      ngModel
     />
   </div>
   <div class="form__group">
@@ -13,11 +18,12 @@
     <input
       id="password"
       type="password"
-      class="form-control"
+      name="password"
       placeholder="Enter your password"
+      ngModel
     />
   </div>
   <div class="form__group">
-    <button>Log in</button>
+    <button type="submit">Log in</button>
   </div>
 </form>
