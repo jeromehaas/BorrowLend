@@ -21,6 +21,11 @@ body {
   padding: 3rem;
 }
 
+a {
+  text-decoration: none;
+  color: $color-primary;
+}
+
 @mixin clearfix {
   &::after {
     content: "";
@@ -77,4 +82,28 @@ body {
       3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal}
     );
   }
+}
+
+.u-center-text {
+  text-align: center !important;
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important;
+}
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
+}
+
+.u-margin-top-big {
+  margin-top: 8rem !important;
+}
+
+.u-margin-top-huge {
+  margin-top: 10rem !important;
 }
