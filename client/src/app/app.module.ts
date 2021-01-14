@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, LoginComponent],
+  declarations: [AppComponent, NavbarComponent, LoginComponent, LoadingComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
