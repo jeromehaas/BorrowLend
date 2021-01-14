@@ -1,5 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Exchanges } from '../exchanges/exchange.entity';
+import { Items } from '../items/item.entity';
 
 @Entity()
 export class Users {
@@ -23,4 +31,12 @@ export class Users {
 
   @OneToMany(() => Exchanges, (exchange: Exchanges) => exchange.userLending)
   public exchangesLend: Exchanges[];
+
+  @ManyToMany(() => Items, (item: Items) => item.usersBorrowing)
+  @JoinTable()
+  public toBorrowList: Items[];
+
+  @ManyToMany(() => Items, (item: Items) => item.usersLending)
+  @JoinTable()
+  public toLendList: Items[];
 }

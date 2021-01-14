@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Users } from './user.entity';
 import { UsersService } from './users.service';
@@ -27,5 +35,45 @@ export class UsersController {
   remove(@Param('id') id: number): Promise<void> {
     id = Number(id);
     return this.usersService.remove(id);
+  }
+
+  @Put('toBorrowListAdd/:id/:itemId')
+  addToToBorrowList(
+    @Param('id') id: number,
+    @Param('itemId') itemId: number,
+  ): Promise<Users> {
+    itemId = Number(itemId);
+    id = Number(id);
+    return this.usersService.addToToBorrowList(id, itemId);
+  }
+
+  @Put('toBorrowListRem/:id/:itemId')
+  remToToBorrowList(
+    @Param('id') id: number,
+    @Param('itemId') itemId: number,
+  ): Promise<Users> {
+    itemId = Number(itemId);
+    id = Number(id);
+    return this.usersService.remToToBorrowList(id, itemId);
+  }
+
+  @Put('toLendListAdd/:id/:itemId')
+  addToToLendList(
+    @Param('id') id: number,
+    @Param('itemId') itemId: number,
+  ): Promise<Users> {
+    itemId = Number(itemId);
+    id = Number(id);
+    return this.usersService.addToToLendList(id, itemId);
+  }
+
+  @Put('toLendListRem/:id/:itemId')
+  remToToLendList(
+    @Param('id') id: number,
+    @Param('itemId') itemId: number,
+  ): Promise<Users> {
+    itemId = Number(itemId);
+    id = Number(id);
+    return this.usersService.remToToLendList(id, itemId);
   }
 }
