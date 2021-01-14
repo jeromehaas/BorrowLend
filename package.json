@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "cd client && ng lint"
+    "lint": "cd client && ng lint",
+    "server": "cd server && npm run start:dev"
   },
   "repository": {
     "type": "git",
