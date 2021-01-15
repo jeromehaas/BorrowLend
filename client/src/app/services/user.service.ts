@@ -16,6 +16,10 @@ export class UserService {
     return this.http.get<User>(`${this.userUrl}/username/${username}`);
   }
 
+  getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.userUrl}/${userId}`);
+  }
+
   addToToBorrowList(userId: number, itemId: number): Observable<User> {
     return this.http.put<User>(
       `${this.userUrl}/toBorrowListAdd/${userId}/${itemId}`,

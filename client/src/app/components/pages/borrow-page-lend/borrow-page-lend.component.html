@@ -1,1 +1,6 @@
-<p>borrow-page-lend works!</p>
+<app-item-card-lend
+  *ngFor="let item of matchingItems"
+  [item]="item"
+  [userLendId]="userLendingId"
+  [itemToBorrowId]="itemBorrowedId"
+></app-item-card-lend>
