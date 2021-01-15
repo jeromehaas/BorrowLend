@@ -64,7 +64,12 @@ export class UsersService {
 
   async addToToBorrowList(id: number, itemId: number): Promise<Users> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ['toBorrowList'],
+      relations: [
+        'exchangesBorr',
+        'exchangesLend',
+        'toLendList',
+        'toBorrowList',
+      ],
     });
     const item = await this.itemsService.findOne(itemId);
     if (
@@ -79,7 +84,12 @@ export class UsersService {
 
   async remToToBorrowList(id: number, itemId: number): Promise<Users> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ['toBorrowList'],
+      relations: [
+        'exchangesBorr',
+        'exchangesLend',
+        'toLendList',
+        'toBorrowList',
+      ],
     });
     const item = await this.itemsService.findOne(itemId);
     user.toBorrowList = user.toBorrowList.filter(
@@ -91,7 +101,12 @@ export class UsersService {
 
   async addToToLendList(id: number, itemId: number): Promise<Users> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ['toLendList'],
+      relations: [
+        'exchangesBorr',
+        'exchangesLend',
+        'toLendList',
+        'toBorrowList',
+      ],
     });
     const item = await this.itemsService.findOne(itemId);
     if (
@@ -105,7 +120,12 @@ export class UsersService {
 
   async remToToLendList(id: number, itemId: number): Promise<Users> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ['toLendList'],
+      relations: [
+        'exchangesBorr',
+        'exchangesLend',
+        'toLendList',
+        'toBorrowList',
+      ],
     });
     const item = await this.itemsService.findOne(itemId);
     user.toLendList = user.toLendList.filter(
