@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../app.state';
-import { setUser } from '../../actions/users.actions';
+import { AppState } from '../../../app.state';
+import { setUser } from '../../../actions/users.actions';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

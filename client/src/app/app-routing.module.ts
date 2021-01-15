@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { SearchPageComponent } from './components/search-page/search-page.component';
-import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
-import { BorrowPageUsersComponent } from './components/borrow-page-users/borrow-page-users.component';
-import { BorrowPageLendComponent } from './components/borrow-page-lend/borrow-page-lend.component';
+import { LoginComponent } from './components/pages/login/login.component';
+import { LoadingComponent } from './components/pages/loading/loading.component';
+import { SearchPageComponent } from './components/pages/search-page/search-page.component';
+import { BorrowPageComponent } from './components/pages/borrow-page/borrow-page.component';
+import { BorrowPageUsersComponent } from './components/pages/borrow-page-users/borrow-page-users.component';
+import { BorrowPageLendComponent } from './components/pages/borrow-page-lend/borrow-page-lend.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { User } from '../../models/user';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-borrow-page-users',
