@@ -17,26 +17,30 @@ export class UserService {
   }
 
   addToToBorrowList(userId: number, itemId: number): Observable<User> {
-    return this.http.get<User>(
-      `${this.userUrl}/toBorrowListAdd/${userId}/${itemId}`
+    return this.http.put<User>(
+      `${this.userUrl}/toBorrowListAdd/${userId}/${itemId}`,
+      {}
     );
   }
 
   removeFromToBorrowList(userId: number, itemId: number): Observable<User> {
-    return this.http.get<User>(
-      `${this.userUrl}/toBorrowListRem/${userId}/${itemId}`
+    return this.http.put<User>(
+      `${this.userUrl}/toBorrowListRem/${userId}/${itemId}`,
+      {}
     );
   }
 
   addToToLendList(userId: number, itemId: number): Observable<User> {
-    return this.http.get<User>(
-      `${this.userUrl}/toLendListAdd/${userId}/${itemId}`
+    return this.http.put<User>(
+      `${this.userUrl}/toLendListAdd/${userId}/${itemId}`,
+      {}
     );
   }
 
   removeFromToLendList(userId: number, itemId: number): Observable<User> {
-    return this.http.get<User>(
-      `${this.userUrl}/toLendListRem/${userId}/${itemId}`
+    return this.http.put<User>(
+      `${this.userUrl}/toLendListRem/${userId}/${itemId}`,
+      {}
     );
   }
 }
