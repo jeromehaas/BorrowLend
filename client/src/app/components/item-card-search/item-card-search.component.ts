@@ -7,11 +7,11 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-item-card',
-  templateUrl: './item-card.component.html',
-  styleUrls: ['./item-card.component.scss'],
+  selector: 'app-item-card-search',
+  templateUrl: './item-card-search.component.html',
+  styleUrls: ['./item-card-search.component.scss'],
 })
-export class ItemCardComponent implements OnInit {
+export class ItemCardSearchComponent implements OnInit {
   @Input() item: Item;
   @Input() user: User;
   itemState: string;
@@ -29,7 +29,6 @@ export class ItemCardComponent implements OnInit {
       value: 'To Lend',
     },
   ];
-  @Input() isBorrowPage: boolean;
 
   constructor(
     private store: Store<AppState>,
@@ -88,15 +87,22 @@ export class ItemCardComponent implements OnInit {
     if (this.itemState === 'tolend') {
       this.userService
         .removeFromToLendList(this.user.id, this.item.id)
+        .subscribe((user1) => {
+          this.store.dispatch(setUser({ user: user1 }));
+          this.userService
+            .addToToBorrowList(this.user.id, this.item.id)
+            .subscribe((user2) => {
+              this.store.dispatch(setUser({ user: user2 }));
+            });
+        });
+    } else {
+      this.userService
+        .addToToBorrowList(this.user.id, this.item.id)
         .subscribe((user) => {
           this.store.dispatch(setUser({ user }));
         });
     }
-    this.userService
-      .addToToBorrowList(this.user.id, this.item.id)
-      .subscribe((user) => {
-        this.store.dispatch(setUser({ user }));
-      });
+
     this.itemState = 'toborrow';
   }
 
@@ -104,15 +110,22 @@ export class ItemCardComponent implements OnInit {
     if (this.itemState === 'toborrow') {
       this.userService
         .removeFromToBorrowList(this.user.id, this.item.id)
+        .subscribe((user1) => {
+          this.store.dispatch(setUser({ user: user1 }));
+          this.userService
+            .addToToLendList(this.user.id, this.item.id)
+            .subscribe((user2) => {
+              this.store.dispatch(setUser({ user: user2 }));
+            });
+        });
+    } else {
+      this.userService
+        .addToToLendList(this.user.id, this.item.id)
         .subscribe((user) => {
           this.store.dispatch(setUser({ user }));
         });
     }
-    this.userService
-      .addToToLendList(this.user.id, this.item.id)
-      .subscribe((user) => {
-        this.store.dispatch(setUser({ user }));
-      });
+
     this.itemState = 'tolend';
   }
 }

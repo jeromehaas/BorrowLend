@@ -11,7 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
+import { ItemCardSearchComponent } from './components/item-card-search/item-card-search.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
 
@@ -21,7 +21,7 @@ import { BorrowPageComponent } from './components/borrow-page/borrow-page.compon
     NavbarComponent,
     LoginComponent,
     LoadingComponent,
-    ItemCardComponent,
+    ItemCardSearchComponent,
     SearchPageComponent,
     BorrowPageComponent,
   ],

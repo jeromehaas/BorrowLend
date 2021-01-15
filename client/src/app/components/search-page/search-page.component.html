@@ -7,10 +7,9 @@
     placeholder="Search an item..."
     autocomplete="off"
   />
-  <app-item-card
+  <app-item-card-search
     *ngFor="let item of itemsToShow"
     [user]="user"
     [item]="item"
-    [isBorrowPage]="false"
-  ></app-item-card>
+  ></app-item-card-search>
 </div>
