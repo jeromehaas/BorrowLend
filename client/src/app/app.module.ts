@@ -7,18 +7,18 @@ import { StoreModule } from '@ngrx/store';
 import { usersReducer } from './reducers/users.reducer';
 import { itemsReducer } from './reducers/items.reducer';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components/elements/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/pages/login/login.component';
 import { LoadingComponent } from './components/pages/loading/loading.component';
-import { ItemCardSearchComponent } from './components/item-card-search/item-card-search.component';
+import { ItemCardSearchComponent } from './components/elements/item-card-search/item-card-search.component';
 import { SearchPageComponent } from './components/pages/search-page/search-page.component';
 import { BorrowPageComponent } from './components/pages/borrow-page/borrow-page.component';
-import { ItemCardBorrowComponent } from './components/item-card-borrow/item-card-borrow.component';
+import { ItemCardBorrowComponent } from './components/elements/item-card-borrow/item-card-borrow.component';
 import { BorrowPageUsersComponent } from './components/pages/borrow-page-users/borrow-page-users.component';
-import { UserCardComponent } from './components/user-card/user-card.component';
+import { UserCardComponent } from './components/elements/user-card/user-card.component';
 import { BorrowPageLendComponent } from './components/pages/borrow-page-lend/borrow-page-lend.component';
-import { ItemCardLendComponent } from './components/item-card-lend/item-card-lend.component';
+import { ItemCardLendComponent } from './components/elements/item-card-lend/item-card-lend.component';
 import { BorrowPageRequestComponent } from './components/pages/borrow-page-request/borrow-page-request.component';
 
 @NgModule({

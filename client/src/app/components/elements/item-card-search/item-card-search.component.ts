@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setUser } from '../../actions/users.actions';
-import { AppState } from '../../app.state';
-import { Item } from '../../models/item';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
+import { setUser } from '../../../actions/users.actions';
+import { AppState } from '../../../app.state';
+import { Item } from '../../../models/item';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-item-card-search',
