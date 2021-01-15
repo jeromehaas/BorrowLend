@@ -15,7 +15,7 @@ import { ItemCardSearchComponent } from './components/item-card-search/item-card
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
 import { ItemCardBorrowComponent } from './components/item-card-borrow/item-card-borrow.component';
-import { BorrowPageUsersComponent } from './borrow-page-users/borrow-page-users.component';
+import { BorrowPageUsersComponent } from './components/borrow-page-users/borrow-page-users.component';
 
 @NgModule({
   declarations: [

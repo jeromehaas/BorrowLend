@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
-import { BorrowPageUsersComponent } from './borrow-page-users/borrow-page-users.component';
+import { BorrowPageUsersComponent } from './components/borrow-page-users/borrow-page-users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
