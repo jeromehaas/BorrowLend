@@ -14,6 +14,7 @@ export class SearchPageComponent implements OnInit {
   user$ = this.store.pipe(select('user'));
   items: Item[];
   items$ = this.store.pipe(select('items'));
+  itemsToShow = [];
 
   constructor(private store: Store<AppState>) {}
 
@@ -24,5 +25,16 @@ export class SearchPageComponent implements OnInit {
     this.items$.subscribe((items) => {
       this.items = items;
     });
+  }
+
+  onKey(event: KeyboardEvent): void {
+    const path = (event.target as HTMLInputElement).value;
+    if (path) {
+      this.itemsToShow = this.items.filter((item) =>
+        item.title.toLowerCase().includes(path.toLowerCase())
+      );
+    } else {
+      this.itemsToShow = [];
+    }
   }
 }
