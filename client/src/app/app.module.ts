@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
     LoadingComponent,
     ItemCardComponent,
     SearchPageComponent,
+    BorrowPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,7 @@ export class ItemCardComponent implements OnInit {
       value: 'To Lend',
     },
   ];
+  @Input() isBorrowPage: boolean;
 
   constructor(
     private store: Store<AppState>,

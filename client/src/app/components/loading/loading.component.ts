@@ -18,13 +18,11 @@ export class LoadingComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigate(['search']);
+    }, 2000);
     this.user$.subscribe((user) => {
       this.user = user;
-      if (user) {
-        setTimeout(() => {
-          this.router.navigate(['search']);
-        }, 2000);
-      }
     });
     this.items$.subscribe((items) => {
       this.items = items;
