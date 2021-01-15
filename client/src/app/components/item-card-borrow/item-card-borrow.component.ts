@@ -8,7 +8,6 @@ import { Item } from 'src/app/models/item';
 })
 export class ItemCardBorrowComponent implements OnInit {
   @Input() item: Item;
-  @Input() userId: number;
 
   constructor() {}
 
