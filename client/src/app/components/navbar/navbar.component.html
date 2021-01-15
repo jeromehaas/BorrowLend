@@ -19,7 +19,7 @@
   <div class="navbar__user">
     <ul *ngIf="user">
       <li>
-        <a href="#">{{ "Logout " + user.username }}</a>
+        <a (click)="logout()" href="#">{{ "Logout " + user.username }}</a>
       </li>
     </ul>
   </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { setUser } from 'src/app/actions/users.actions';
 import { AppState } from 'src/app/app.state';
 import { User } from 'src/app/models/user';
 
@@ -18,5 +19,9 @@ export class NavbarComponent implements OnInit {
     this.user$.subscribe((user) => {
       this.user = user;
     });
+  }
+
+  logout(): void {
+    this.store.dispatch(setUser(null));
   }
 }
