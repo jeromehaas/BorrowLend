@@ -11,7 +11,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { ItemCardComponent } from './item-card/item-card.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ItemCardComponent } from './item-card/item-card.component';
     LoginComponent,
     LoadingComponent,
     ItemCardComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
