@@ -1,1 +1,5 @@
-<p>borrow-page-users works!</p>
+<app-user-card
+  *ngFor="let user of usersLending"
+  [user]="user"
+  [itemId]="itemId"
+></app-user-card>

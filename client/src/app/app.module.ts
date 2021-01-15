@@ -16,6 +16,8 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
 import { ItemCardBorrowComponent } from './components/item-card-borrow/item-card-borrow.component';
 import { BorrowPageUsersComponent } from './components/borrow-page-users/borrow-page-users.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { BorrowPageLendComponent } from './components/borrow-page-lend/borrow-page-lend.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { BorrowPageUsersComponent } from './components/borrow-page-users/borrow-
     BorrowPageComponent,
     ItemCardBorrowComponent,
     BorrowPageUsersComponent,
+    UserCardComponent,
+    BorrowPageLendComponent,
   ],
   imports: [
     BrowserModule,
