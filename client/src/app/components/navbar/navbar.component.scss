@@ -36,3 +36,20 @@
     }
   }
 }
+
+@media (max-width: 750px) {
+  .navbar__logo-text {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    font-size: 1.2rem;
+    &__logo {
+      img {
+        height: 4rem;
+      }
+    }
+  }
+}

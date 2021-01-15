@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "cd client && ng lint",
     "server": "cd server && npm run start:dev",
-    "client": "cd client && ng serve"
+    "client": "cd client && ng serve -o"
   },
   "repository": {
     "type": "git",
