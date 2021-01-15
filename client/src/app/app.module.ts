@@ -14,6 +14,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ItemCardSearchComponent } from './components/item-card-search/item-card-search.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
+import { ItemCardBorrowComponent } from './components/item-card-borrow/item-card-borrow.component';
+import { BorrowPageUsersComponent } from './borrow-page-users/borrow-page-users.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { BorrowPageComponent } from './components/borrow-page/borrow-page.compon
     ItemCardSearchComponent,
     SearchPageComponent,
     BorrowPageComponent,
+    ItemCardBorrowComponent,
+    BorrowPageUsersComponent,
   ],
   imports: [
     BrowserModule,

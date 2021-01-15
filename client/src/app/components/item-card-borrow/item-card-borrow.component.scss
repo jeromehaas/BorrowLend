@@ -1,0 +1,18 @@
+.item-card {
+  font-size: 3rem;
+  display: flex;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 3px;
+  justify-content: space-between;
+  width: 60rem;
+  p {
+    align-self: center;
+    flex: 1;
+  }
+  img {
+    height: 30rem;
+    width: 30rem;
+    flex: 1;
+  }
+}

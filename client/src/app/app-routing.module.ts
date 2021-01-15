@@ -4,13 +4,15 @@ import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BorrowPageComponent } from './components/borrow-page/borrow-page.component';
+import { BorrowPageUsersComponent } from './borrow-page-users/borrow-page-users.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'search', component: SearchPageComponent },
   { path: 'borrow', component: BorrowPageComponent },
+  { path: 'borrow/users/:itemId', component: BorrowPageUsersComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
