@@ -43,4 +43,8 @@ export class UserService {
       {}
     );
   }
+
+  getUsersLending(itemId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.userUrl}/lending/${itemId}`);
+  }
 }
