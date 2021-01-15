@@ -1,0 +1,9 @@
+<div class="item-card" *ngIf="item">
+  <p>{{ item.title }}</p>
+  <img src="{{ item.img }}" alt="item-image" />
+  <select name="options" id="options" (change)="onChange($event.target.value)">
+    <option value="none">-</option>
+    <option value="toborrow">To Borrow</option>
+    <option value="lend">To Lend</option>
+  </select>
+</div>
