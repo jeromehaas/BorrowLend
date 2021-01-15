@@ -27,7 +27,6 @@ export class LoadingComponent implements OnInit {
       }
     });
     this.items$.subscribe((items) => {
-      console.log('items :>> ', items);
       this.items = items;
     });
   }
