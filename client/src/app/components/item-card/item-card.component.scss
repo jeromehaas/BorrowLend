@@ -8,13 +8,17 @@
   width: 60rem;
   p {
     align-self: center;
+    flex: 1;
   }
   select {
     align-self: center;
     height: 3rem;
     width: 10rem;
+    flex: 1;
   }
   img {
-    height: 20rem;
+    height: 30rem;
+    width: 30rem;
+    flex: 1;
   }
 }

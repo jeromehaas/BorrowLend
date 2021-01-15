@@ -10,15 +10,17 @@
     />
   </div>
   <div class="navbar__actions">
-    <ul>
-      <li><a href="#">Search</a></li>
+    <ul *ngIf="user">
+      <li><a href="search">Search</a></li>
       <li><a href="#">Borrow</a></li>
       <li><a href="#">Requests</a></li>
     </ul>
   </div>
   <div class="navbar__user">
-    <ul>
-      <li><a href="#">Logout</a></li>
+    <ul *ngIf="user">
+      <li>
+        <a href="#">{{ "Logout " + user.username }}</a>
+      </li>
     </ul>
   </div>
 </div>

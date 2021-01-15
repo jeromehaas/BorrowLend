@@ -23,7 +23,7 @@ export class LoadingComponent implements OnInit {
       if (user) {
         setTimeout(() => {
           this.router.navigate(['search']);
-        }, 5000);
+        }, 2000);
       }
     });
     this.items$.subscribe((items) => {

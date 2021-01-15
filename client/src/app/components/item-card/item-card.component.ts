@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { setUser } from '../../actions/users.actions';
 import { AppState } from '../../app.state';
 import { Item } from '../../models/item';
@@ -13,8 +13,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item: Item;
-  user: User;
-  user$ = this.store.pipe(select('user'));
+  @Input() user: User;
   itemState: string;
   options = [
     {
@@ -35,6 +34,22 @@ export class ItemCardComponent implements OnInit {
     private store: Store<AppState>,
     private userService: UserService
   ) {}
+
+  ngOnInit(): void {
+    this.user.toBorrowList.forEach((item) => {
+      if (item.id === this.item.id) {
+        this.itemState = 'toborrow';
+      }
+    });
+    this.user.toLendList.forEach((item) => {
+      if (item.id === this.item.id) {
+        this.itemState = 'tolend';
+      }
+    });
+    if (!this.itemState) {
+      this.itemState = 'none';
+    }
+  }
 
   onChange(value): void {
     switch (value) {
@@ -98,26 +113,5 @@ export class ItemCardComponent implements OnInit {
         this.store.dispatch(setUser({ user }));
       });
     this.itemState = 'tolend';
-  }
-
-  ngOnInit(): void {
-    this.user$.subscribe((user) => {
-      if (user) {
-        this.user = user;
-        this.user.toBorrowList.forEach((item) => {
-          if (item.id === this.item.id) {
-            this.itemState = 'toborrow';
-          }
-        });
-        this.user.toLendList.forEach((item) => {
-          if (item.id === this.item.id) {
-            this.itemState = 'tolend';
-          }
-        });
-        if (!this.itemState) {
-          this.itemState = 'none';
-        }
-      }
-    });
   }
 }
