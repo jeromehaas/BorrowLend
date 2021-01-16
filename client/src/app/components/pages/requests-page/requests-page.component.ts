@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Exchange } from 'src/app/models/exchange';
+import { ExchangeComplete } from 'src/app/models/exchange-complete';
+import { ExchangeService } from 'src/app/services/exchange.service';
 
 @Component({
   selector: 'app-requests-page',
@@ -9,19 +10,34 @@ import { Exchange } from 'src/app/models/exchange';
   styleUrls: ['./requests-page.component.scss'],
 })
 export class RequestsPageComponent implements OnInit {
-  exchangesBorr: Exchange[];
-  exchangesLend: Exchange[];
+  exchangesBorr: ExchangeComplete[] = [];
+  exchangesLend: ExchangeComplete[] = [];
   user$ = this.store.pipe(select((state) => state.user));
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private exchangeService: ExchangeService
+  ) {}
 
   ngOnInit(): void {
     this.user$.subscribe((user) => {
       if (user) {
-        this.exchangesLend = user.exchangesLend;
-        this.exchangesBorr = user.exchangesBorr;
-        console.log('this.exchangesBorr :>> ', this.exchangesBorr);
-        console.log('this.exchangesLend :>> ', this.exchangesLend);
+        user.exchangesBorr.forEach((exchange) => {
+          this.exchangeService
+            .getExchange(exchange.id)
+            .subscribe((exchangeComplete) => {
+              this.exchangesBorr.push(exchangeComplete);
+              console.log('exchangeComplete :>> ', exchangeComplete);
+            });
+        });
+        user.exchangesLend.forEach((exchange) => {
+          this.exchangeService
+            .getExchange(exchange.id)
+            .subscribe((exchangeComplete) => {
+              this.exchangesLend.push(exchangeComplete);
+              console.log('exchangeComplete :>> ', exchangeComplete);
+            });
+        });
       }
     });
   }

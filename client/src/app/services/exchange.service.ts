@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiUrl } from './apiUrl';
 import { Exchange } from '../models/exchange';
+import { ExchangeComplete } from '../models/exchange-complete';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class ExchangeService {
   constructor(private http: HttpClient) {}
 
   createExchange(exchange: any): Observable<Exchange> {
-    return this.http.post<any>(`${this.userUrl}`, exchange);
+    return this.http.post<Exchange>(`${this.userUrl}`, exchange);
+  }
+
+  getExchange(id: number): Observable<ExchangeComplete> {
+    return this.http.get<ExchangeComplete>(`${this.userUrl}/${id}`);
   }
 }
