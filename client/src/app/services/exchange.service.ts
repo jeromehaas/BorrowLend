@@ -31,4 +31,12 @@ export class ExchangeService {
       {}
     );
   }
+
+  acceptExchange(id: number): Observable<ExchangeComplete> {
+    return this.http.put<ExchangeComplete>(`${this.userUrl}/accept/${id}`, {});
+  }
+
+  rejectExchange(id: number): Observable<ExchangeComplete> {
+    return this.http.put<ExchangeComplete>(`${this.userUrl}/reject/${id}`, {});
+  }
 }

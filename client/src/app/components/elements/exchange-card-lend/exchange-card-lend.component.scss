@@ -1,0 +1,15 @@
+.exchange-card-lend {
+  display: flex;
+  flex-direction: column;
+  &__users {
+    display: flex;
+    justify-content: space-around;
+    img {
+      width: 20rem;
+      height: 20rem;
+    }
+  }
+
+  button {
+  }
+}

@@ -26,14 +26,16 @@ export class BorrowPageLendComponent implements OnInit {
     this.userLendingId = +this.route.snapshot.paramMap.get('userLendId');
     this.itemBorrowedId = +this.route.snapshot.paramMap.get('itemId');
     this.user$.subscribe((user) => {
-      this.userService
-        .getUserById(this.userLendingId)
-        .subscribe((userLending) => {
-          // Get all the items that are in the to borrow list of the user lending and in the to lend list of the user borrowing
-          this.matchingItems = userLending.toBorrowList.filter((a) =>
-            user.toLendList.some((b) => a.id === b.id)
-          );
-        });
+      if (user) {
+        this.userService
+          .getUserById(this.userLendingId)
+          .subscribe((userLending) => {
+            // Get all the items that are in the to borrow list of the user lending and in the to lend list of the user borrowing
+            this.matchingItems = userLending.toBorrowList.filter((a) =>
+              user.toLendList.some((b) => a.id === b.id)
+            );
+          });
+      }
     });
   }
 }
