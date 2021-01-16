@@ -21,10 +21,28 @@ export class ExchangesService {
     const userLendingId = Number(createExchangeDto.userLendingId);
     const itemBorrowedId = Number(createExchangeDto.itemBorrowedId);
     const itemLentId = Number(createExchangeDto.itemLentId);
+    const savedExchanges = await this.exchangesRepository.find({
+      relations: ['userBorrowing', 'userLending', 'itemBorrowed', 'itemLent'],
+    });
+    let exchangeAlreadySaved = false;
+    savedExchanges.forEach((exchange) => {
+      if (
+        exchange.userBorrowing.id === userBorrowingId &&
+        exchange.userLending.id === userLendingId &&
+        exchange.itemBorrowed.id === itemBorrowedId &&
+        exchange.itemLent.id === itemLentId
+      ) {
+        exchangeAlreadySaved = true;
+      }
+    });
+    if (exchangeAlreadySaved) {
+      return null;
+    }
     exchange.userBorrowing = await this.usersService.findOne(userBorrowingId);
     exchange.userLending = await this.usersService.findOne(userLendingId);
     exchange.itemBorrowed = await this.itemsService.findOne(itemBorrowedId);
     exchange.itemLent = await this.itemsService.findOne(itemLentId);
+    exchange.createdAt = new Date();
     return this.exchangesRepository.save(exchange);
   }
 

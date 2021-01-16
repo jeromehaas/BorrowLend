@@ -16,6 +16,9 @@ export class Exchanges {
   @Column({ nullable: true })
   public isActiveLend: boolean;
 
+  @Column()
+  public createdAt: Date;
+
   @ManyToOne(() => Users, (userBorrowing: Users) => userBorrowing.exchangesBorr)
   public userBorrowing: Users;
 

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -16,8 +17,14 @@ export class ExchangesController {
   constructor(private readonly exchangesService: ExchangesService) {}
 
   @Post()
-  create(@Body() createExchangeDto: CreateExchangeDto): Promise<Exchanges> {
-    return this.exchangesService.create(createExchangeDto);
+  async create(
+    @Body() createExchangeDto: CreateExchangeDto,
+  ): Promise<Exchanges> {
+    const exchange = await this.exchangesService.create(createExchangeDto);
+    if (exchange === null) {
+      throw new BadRequestException('Exchange already saved');
+    }
+    return exchange;
   }
 
   @Get()
