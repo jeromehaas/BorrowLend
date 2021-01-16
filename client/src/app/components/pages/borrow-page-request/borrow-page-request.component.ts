@@ -60,6 +60,7 @@ export class BorrowPageRequestComponent implements OnInit {
       })
       .subscribe(
         (exchange) => {
+          // TODO: update user state
           this.exchangeStatus = true;
         },
         (error) => {

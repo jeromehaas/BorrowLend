@@ -7,6 +7,7 @@ import { BorrowPageComponent } from './components/pages/borrow-page/borrow-page.
 import { BorrowPageUsersComponent } from './components/pages/borrow-page-users/borrow-page-users.component';
 import { BorrowPageLendComponent } from './components/pages/borrow-page-lend/borrow-page-lend.component';
 import { BorrowPageRequestComponent } from './components/pages/borrow-page-request/borrow-page-request.component';
+import { RequestsPageComponent } from './components/pages/requests-page/requests-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
     path: 'borrow/request/:itemId/:userLendId/:itemLendId',
     component: BorrowPageRequestComponent,
   },
+  { path: 'requests', component: RequestsPageComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

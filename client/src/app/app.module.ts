@@ -20,6 +20,9 @@ import { UserCardComponent } from './components/elements/user-card/user-card.com
 import { BorrowPageLendComponent } from './components/pages/borrow-page-lend/borrow-page-lend.component';
 import { ItemCardLendComponent } from './components/elements/item-card-lend/item-card-lend.component';
 import { BorrowPageRequestComponent } from './components/pages/borrow-page-request/borrow-page-request.component';
+import { RequestsPageComponent } from './components/pages/requests-page/requests-page.component';
+import { ExchangeCardBorrowComponent } from './components/elements/exchange-card-borrow/exchange-card-borrow.component';
+import { ExchangeCardLendComponent } from './components/elements/exchange-card-lend/exchange-card-lend.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { BorrowPageRequestComponent } from './components/pages/borrow-page-reque
     BorrowPageLendComponent,
     ItemCardLendComponent,
     BorrowPageRequestComponent,
+    RequestsPageComponent,
+    ExchangeCardBorrowComponent,
+    ExchangeCardLendComponent,
   ],
   imports: [
     BrowserModule,
