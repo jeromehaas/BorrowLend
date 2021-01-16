@@ -15,4 +15,8 @@ export class ItemsService {
   getItems(): Observable<Item[]> {
     return this.http.get<Item[]>(`${this.itemUrl}`);
   }
+
+  getItemById(itemId: number): Observable<Item> {
+    return this.http.get<Item>(`${this.itemUrl}/${itemId}`);
+  }
 }

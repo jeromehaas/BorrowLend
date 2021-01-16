@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { Item } from 'src/app/models/item';
+import { User } from 'src/app/models/user';
+import { ItemsService } from 'src/app/services/items.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,24 +13,37 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./borrow-page-request.component.scss'],
 })
 export class BorrowPageRequestComponent implements OnInit {
-  userLendId: number;
-  itemToBorrowId: number;
-  itemToLendId: number;
-  userBorrId: number;
+  userLend: User;
+  itemToBorrow: Item;
+  itemToLend: Item;
+  userBorr: User;
   user$ = this.store.pipe(select('user'));
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private userService: UserService,
+    private itemsService: ItemsService
+  ) {}
 
   ngOnInit(): void {
-    this.userLendId = +this.route.snapshot.paramMap.get('userLendId');
-    this.itemToBorrowId = +this.route.snapshot.paramMap.get('itemId');
-    this.itemToLendId = +this.route.snapshot.paramMap.get('itemLendId');
+    this.userService
+      .getUserById(+this.route.snapshot.paramMap.get('userLendId'))
+      .subscribe((userLend) => {
+        this.userLend = userLend;
+      });
+    this.itemsService
+      .getItemById(+this.route.snapshot.paramMap.get('itemId'))
+      .subscribe((item) => {
+        this.itemToBorrow = item;
+      });
+    this.itemsService
+      .getItemById(+this.route.snapshot.paramMap.get('itemLendId'))
+      .subscribe((item) => {
+        this.itemToLend = item;
+      });
     this.user$.subscribe((user) => {
-      this.userBorrId = user.id;
-      console.log('this.userLendId :>> ', this.userLendId);
-      console.log('this.itemToBorrowId :>> ', this.itemToBorrowId);
-      console.log('this.itemToLendId :>> ', this.itemToLendId);
-      console.log('this.userBorrId :>> ', this.userBorrId);
+      this.userBorr = user;
     });
   }
 }

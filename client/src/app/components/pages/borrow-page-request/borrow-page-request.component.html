@@ -1,1 +1,6 @@
-<p>borrow-page-request works!</p>
+<div class="borrow-page-request">
+  <p *ngIf="userLend">{{ userLend.id }}</p>
+  <p *ngIf="userBorr">{{ userBorr.id }}</p>
+  <p *ngIf="itemToBorrow">{{ itemToBorrow.id }}</p>
+  <p *ngIf="itemToLend">{{ itemToLend.id }}</p>
+</div>
