@@ -4,6 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Item } from 'src/app/models/item';
 import { User } from 'src/app/models/user';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,12 +19,14 @@ export class BorrowPageRequestComponent implements OnInit {
   itemToLend: Item;
   userBorr: User;
   user$ = this.store.pipe(select('user'));
+  exchangeStatus?: boolean = null;
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private userService: UserService,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private exchangeService: ExchangeService
   ) {}
 
   ngOnInit(): void {
@@ -45,5 +48,23 @@ export class BorrowPageRequestComponent implements OnInit {
     this.user$.subscribe((user) => {
       this.userBorr = user;
     });
+  }
+
+  createExchange(): void {
+    this.exchangeService
+      .createExchange({
+        userLendingId: this.userLend.id,
+        userBorrowingId: this.userBorr.id,
+        itemLentId: this.itemToLend.id,
+        itemBorrowedId: this.itemToBorrow.id,
+      })
+      .subscribe(
+        (exchange) => {
+          this.exchangeStatus = true;
+        },
+        (error) => {
+          this.exchangeStatus = false;
+        }
+      );
   }
 }

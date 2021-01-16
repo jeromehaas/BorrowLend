@@ -1,6 +1,25 @@
 <div class="borrow-page-request">
-  <p *ngIf="userLend">{{ userLend.id }}</p>
-  <p *ngIf="userBorr">{{ userBorr.id }}</p>
-  <p *ngIf="itemToBorrow">{{ itemToBorrow.id }}</p>
-  <p *ngIf="itemToLend">{{ itemToLend.id }}</p>
+  <div class="borrow-page-request__users">
+    <div class="borrow-page-request__users-1" *ngIf="userBorr && itemToLend">
+      <p>User borrowing</p>
+      <p>{{ userBorr.username }}</p>
+      <p>{{ userBorr.location }}</p>
+      <p>{{ itemToLend.title }}</p>
+      <img src="{{ itemToLend.img }}" alt="item to lend" />
+    </div>
+    <div class="borrow-page-request__users-2" *ngIf="userLend && itemToBorrow">
+      <p>User lending</p>
+      <p>{{ userLend.username }}</p>
+      <p>{{ userLend.location }}</p>
+      <p>{{ itemToBorrow.title }}</p>
+      <img src="{{ itemToBorrow.img }}" alt="item to borrow" />
+    </div>
+  </div>
+  <button (click)="createExchange()" class="borrow-page-request__send">
+    Send request
+  </button>
+  <div *ngIf="exchangeStatus !== null">
+    <div *ngIf="exchangeStatus">Created</div>
+    <div *ngIf="!exchangeStatus">Already in database</div>
+  </div>
 </div>
