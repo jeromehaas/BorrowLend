@@ -20,4 +20,15 @@ export class ExchangeService {
   getExchange(id: number): Observable<ExchangeComplete> {
     return this.http.get<ExchangeComplete>(`${this.userUrl}/${id}`);
   }
+
+  deleteExchange(id: number): Observable<object> {
+    return this.http.delete(`${this.userUrl}/${id}`);
+  }
+
+  endExchange(id: number, userId: number): Observable<ExchangeComplete> {
+    return this.http.put<ExchangeComplete>(
+      `${this.userUrl}/end/${id}/${userId}`,
+      {}
+    );
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { setUser } from 'src/app/actions/users.actions';
 import { AppState } from 'src/app/app.state';
 import { Item } from 'src/app/models/item';
 import { User } from 'src/app/models/user';
@@ -59,9 +60,11 @@ export class BorrowPageRequestComponent implements OnInit {
         itemBorrowedId: this.itemToBorrow.id,
       })
       .subscribe(
-        (exchange) => {
-          // TODO: update user state
-          this.exchangeStatus = true;
+        () => {
+          this.userService.getUserById(this.userBorr.id).subscribe((user) => {
+            this.store.dispatch(setUser({ user }));
+            this.exchangeStatus = true;
+          });
         },
         (error) => {
           this.exchangeStatus = false;
