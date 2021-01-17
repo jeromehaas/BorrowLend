@@ -44,8 +44,17 @@ export class ExchangesService {
     );
     exchange.userLending = await this.usersService.remToToLendList(
       userLendingId,
+      itemBorrowedId,
+    );
+    exchange.userBorrowing = await this.usersService.remToToLendList(
+      userBorrowingId,
       itemLentId,
     );
+    exchange.userLending = await this.usersService.remToToBorrowList(
+      userLendingId,
+      itemLentId,
+    );
+
     exchange.itemBorrowed = await this.itemsService.findOne(itemBorrowedId);
     exchange.itemLent = await this.itemsService.findOne(itemLentId);
     exchange.createdAt = new Date();
@@ -73,8 +82,17 @@ export class ExchangesService {
       exchange.userBorrowing.id,
       exchange.itemBorrowed.id,
     );
+
     await this.usersService.addToToLendList(
       exchange.userLending.id,
+      exchange.itemBorrowed.id,
+    );
+    await this.usersService.addToToBorrowList(
+      exchange.userLending.id,
+      exchange.itemLent.id,
+    );
+    await this.usersService.addToToLendList(
+      exchange.userBorrowing.id,
       exchange.itemLent.id,
     );
 

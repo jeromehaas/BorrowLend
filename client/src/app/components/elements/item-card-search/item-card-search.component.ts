@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { setUser } from '../../../actions/users.actions';
 import { AppState } from '../../../app.state';
 import { Item } from '../../../models/item';
@@ -32,7 +33,8 @@ export class ItemCardSearchComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private userService: UserService
+    private userService: UserService,
+    private exchangeService: ExchangeService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,30 @@ export class ItemCardSearchComponent implements OnInit {
     if (!this.itemState) {
       this.itemState = 'none';
     }
+    this.user.exchangesBorr.forEach((exchange) => {
+      this.exchangeService
+        .getExchange(exchange.id)
+        .subscribe((exchangeComplete) => {
+          if (
+            exchangeComplete.itemBorrowed.id === this.item.id ||
+            exchangeComplete.itemLent.id === this.item.id
+          ) {
+            this.itemState = 'exchange';
+          }
+        });
+    });
+    this.user.exchangesLend.forEach((exchange) => {
+      this.exchangeService
+        .getExchange(exchange.id)
+        .subscribe((exchangeComplete) => {
+          if (
+            exchangeComplete.itemBorrowed.id === this.item.id ||
+            exchangeComplete.itemLent.id === this.item.id
+          ) {
+            this.itemState = 'exchange';
+          }
+        });
+    });
   }
 
   onChange(value): void {
