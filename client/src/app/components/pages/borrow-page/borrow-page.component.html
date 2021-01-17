@@ -1,4 +1,6 @@
-<app-item-card-borrow
-  *ngFor="let item of user.toBorrowList"
-  [item]="item"
-></app-item-card-borrow>
+<ng-container *ngIf="user">
+  <app-item-card-borrow
+    *ngFor="let item of user.toBorrowList"
+    [item]="item"
+  ></app-item-card-borrow>
+</ng-container>

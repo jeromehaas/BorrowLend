@@ -38,8 +38,14 @@ export class ExchangesService {
     if (exchangeAlreadySaved) {
       return null;
     }
-    exchange.userBorrowing = await this.usersService.findOne(userBorrowingId);
-    exchange.userLending = await this.usersService.findOne(userLendingId);
+    exchange.userBorrowing = await this.usersService.remToToBorrowList(
+      userBorrowingId,
+      itemBorrowedId,
+    );
+    exchange.userLending = await this.usersService.remToToLendList(
+      userLendingId,
+      itemLentId,
+    );
     exchange.itemBorrowed = await this.itemsService.findOne(itemBorrowedId);
     exchange.itemLent = await this.itemsService.findOne(itemLentId);
     exchange.createdAt = new Date();
@@ -59,6 +65,19 @@ export class ExchangesService {
   }
 
   async remove(id: number): Promise<void> {
+    const exchange = await this.exchangesRepository.findOne(id, {
+      relations: ['userBorrowing', 'userLending', 'itemBorrowed', 'itemLent'],
+    });
+
+    await this.usersService.addToToBorrowList(
+      exchange.userBorrowing.id,
+      exchange.itemBorrowed.id,
+    );
+    await this.usersService.addToToLendList(
+      exchange.userLending.id,
+      exchange.itemLent.id,
+    );
+
     await this.exchangesRepository.delete(id);
   }
 
