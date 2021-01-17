@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Exchange } from 'src/app/models/exchange';
+import { ExchangeService } from 'src/app/services/exchange.service';
 import { setUser } from '../../../actions/users.actions';
 import { AppState } from '../../../app.state';
 import { Item } from '../../../models/item';
@@ -32,23 +34,40 @@ export class ItemCardSearchComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private userService: UserService
+    private userService: UserService,
+    private exchangeService: ExchangeService
   ) {}
 
   ngOnInit(): void {
-    this.user.toBorrowList.forEach((item) => {
-      if (item.id === this.item.id) {
-        this.itemState = 'toborrow';
-      }
-    });
-    this.user.toLendList.forEach((item) => {
-      if (item.id === this.item.id) {
-        this.itemState = 'tolend';
-      }
-    });
+    this.checkState(this.user.toBorrowList, 'toborrow');
+    this.checkState(this.user.toLendList, 'tolend');
+
     if (!this.itemState) {
       this.itemState = 'none';
     }
+
+    this.checkIfInAnExchange(this.user.exchangesBorr);
+    this.checkIfInAnExchange(this.user.exchangesLend);
+  }
+
+  checkState(list: Item[], state: string): void {
+    list.forEach((item) => {
+      if (item.id === this.item.id) {
+        this.itemState = state;
+      }
+    });
+  }
+
+  checkIfInAnExchange(exchanges: Exchange[]): void {
+    exchanges.forEach((exchange) => {
+      this.exchangeService
+        .getExchange(exchange.id)
+        .subscribe((exchangeComplete) => {
+          if (this.item.id === exchangeComplete.itemBorrowed.id) {
+            this.itemState = 'exchange';
+          }
+        });
+    });
   }
 
   onChange(value): void {

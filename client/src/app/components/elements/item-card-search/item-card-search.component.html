@@ -1,7 +1,11 @@
 <div class="item-card" *ngIf="item">
   <p>{{ item.title }}</p>
   <img src="{{ item.img }}" alt="item-image" />
-  <select (change)="onChange($event.target.value)">
+  <div *ngIf="this.itemState === 'exchange'">Already in an exchange</div>
+  <select
+    *ngIf="this.itemState !== 'exchange'"
+    (change)="onChange($event.target.value)"
+  >
     <option
       *ngFor="let opt of options"
       [value]="opt.key"
