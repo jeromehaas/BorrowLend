@@ -54,13 +54,15 @@
     class="exchange-card__info"
     *ngIf="exchange.accepted && exchange.isActiveLend === false"
   >
-    Ended by other user
+    {{ "Ended by " + exchange.userLending.username }}
   </div>
   <div
     class="exchange-card__info"
     *ngIf="exchange.accepted && exchange.isActiveBorr === false"
   >
-    Waiting for other user to end the exchange
+    {{
+      "Waiting for " + exchange.userLending.username + " to end the exchange"
+    }}
   </div>
   <button
     (click)="deleteExchange()"
