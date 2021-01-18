@@ -1,6 +1,24 @@
-<div class="user-card">
-  <a routerLink="/borrow/lend/{{ itemId }}/{{ user.id }}">
-    <p>{{ user.username }}</p>
-    <p>{{ user.location }}</p>
-  </a>
-</div>
+<a routerLink="/borrow/lend/{{ itemId }}/{{ user.id }}">
+  <div class="user-card">
+    <div class="user-card__username">
+      <span class="bold">Username: </span> <span> {{ user.username }}</span>
+    </div>
+    <div class="user-card__location">
+      <span class="bold">Location: </span> <span> {{ user.location }}</span>
+    </div>
+    <p *ngIf="matchingItemsNo !== 1">
+      {{
+        "You are lending " +
+          matchingItemsNo +
+          " games this user is interested in."
+      }}
+    </p>
+    <p *ngIf="matchingItemsNo === 1">
+      {{
+        "You are lending " +
+          matchingItemsNo +
+          " game this user is interested in."
+      }}
+    </p>
+  </div>
+</a>

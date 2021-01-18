@@ -1,0 +1,18 @@
+@import "../../../../variables.scss";
+
+.user-card {
+  color: $color-black;
+  font-size: 2rem;
+  padding: 1rem;
+  border: 1px solid $color-black;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15rem;
+  width: 50rem;
+}
+
+.bold {
+  font-weight: 700;
+}
