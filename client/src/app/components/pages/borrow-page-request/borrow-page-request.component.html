@@ -1,4 +1,7 @@
-<div class="request-button">
+<div
+  class="request-button"
+  *ngIf="userBorr && userLend && itemToLend && itemToBorrow"
+>
   <div class="borrow-page-request">
     <div class="borrow-page-request__user">
       <div class="borrow-page-request__user-username">
