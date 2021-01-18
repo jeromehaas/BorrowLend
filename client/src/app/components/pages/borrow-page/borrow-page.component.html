@@ -1,6 +1,9 @@
-<ng-container *ngIf="user">
+<div *ngIf="user" class="borrow-page">
   <app-item-card-borrow
     *ngFor="let item of user.toBorrowList"
     [item]="item"
   ></app-item-card-borrow>
-</ng-container>
+  <p *ngIf="user.toBorrowList.length === 0">
+    Add items in your To Borrow list in the Search section
+  </p>
+</div>
