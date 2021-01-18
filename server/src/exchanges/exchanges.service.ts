@@ -74,29 +74,33 @@ export class ExchangesService {
   }
 
   async remove(id: number): Promise<void> {
-    const exchange = await this.exchangesRepository.findOne(id, {
-      relations: ['userBorrowing', 'userLending', 'itemBorrowed', 'itemLent'],
-    });
+    try {
+      const exchange = await this.exchangesRepository.findOne(id, {
+        relations: ['userBorrowing', 'userLending', 'itemBorrowed', 'itemLent'],
+      });
 
-    await this.usersService.addToToBorrowList(
-      exchange.userBorrowing.id,
-      exchange.itemBorrowed.id,
-    );
+      await this.usersService.addToToBorrowList(
+        exchange.userBorrowing.id,
+        exchange.itemBorrowed.id,
+      );
 
-    await this.usersService.addToToLendList(
-      exchange.userLending.id,
-      exchange.itemBorrowed.id,
-    );
-    await this.usersService.addToToBorrowList(
-      exchange.userLending.id,
-      exchange.itemLent.id,
-    );
-    await this.usersService.addToToLendList(
-      exchange.userBorrowing.id,
-      exchange.itemLent.id,
-    );
+      await this.usersService.addToToLendList(
+        exchange.userLending.id,
+        exchange.itemBorrowed.id,
+      );
+      await this.usersService.addToToBorrowList(
+        exchange.userLending.id,
+        exchange.itemLent.id,
+      );
+      await this.usersService.addToToLendList(
+        exchange.userBorrowing.id,
+        exchange.itemLent.id,
+      );
 
-    await this.exchangesRepository.delete(id);
+      await this.exchangesRepository.delete(id);
+    } catch (error) {
+      console.log('error :>> ', error);
+    }
   }
 
   async accept(id: number): Promise<Exchanges> {
