@@ -29,9 +29,22 @@
       font-weight: 700;
     }
 
-    &-rate {
+    &-rating {
       flex: 1;
       align-self: center;
+      unicode-bidi: bidi-override;
+      direction: rtl;
+      color: $color-primary;
+      & > span {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+      }
+      & > span:before,
+      span ~ span:before {
+        content: "\2605";
+        position: absolute;
+      }
     }
 
     &-drop {
