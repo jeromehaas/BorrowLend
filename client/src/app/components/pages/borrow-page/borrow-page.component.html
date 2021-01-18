@@ -1,4 +1,5 @@
 <div *ngIf="user" class="borrow-page">
+  <p *ngIf="user.toBorrowList.length !== 0">My To Borrow list</p>
   <app-item-card-borrow
     *ngFor="let item of user.toBorrowList"
     [item]="item"
