@@ -12,6 +12,7 @@
   height: 15rem;
   width: 50rem;
   transition: linear 0.1s;
+  background-color: $color-white;
 
   &:hover {
     transform: translateY(-4px);

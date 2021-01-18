@@ -5,6 +5,9 @@
   font-size: 2rem;
   display: flex;
   justify-content: space-between;
+  background-color: $color-white;
+  padding: 3rem;
+  border-bottom: 1px solid $color-black;
 
   &__logo {
     position: relative;

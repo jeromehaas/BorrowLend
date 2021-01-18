@@ -8,6 +8,8 @@
   border-radius: 1rem;
   overflow: hidden;
   height: 20rem;
+  background-color: $color-white;
+
   &__img {
     flex: 1;
     img {
