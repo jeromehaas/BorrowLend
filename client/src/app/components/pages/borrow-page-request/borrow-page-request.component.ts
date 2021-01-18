@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import * as confetti from 'canvas-confetti';
 import { setUser } from 'src/app/actions/users.actions';
 import { AppState } from 'src/app/app.state';
 import { Item } from 'src/app/models/item';
@@ -62,6 +63,16 @@ export class BorrowPageRequestComponent implements OnInit {
         () => {
           this.userService.getUserById(this.userBorr.id).subscribe((user) => {
             this.store.dispatch(setUser({ user }));
+            confetti.create(undefined, { resize: true, useWorker: false })({
+              startVelocity: 80,
+              particleCount: 200,
+              gravity: 2,
+              ticks: 400,
+              origin: {
+                x: 0.5,
+                y: 0.8,
+              },
+            });
           });
         },
         (error) => {
