@@ -1,4 +1,4 @@
-<div *ngFor="let exchange of exchanges">
+<div class="requests-page" *ngFor="let exchange of exchanges">
   <app-exchange-card-lend
     *ngIf="exchange.userBorrowing.id !== user.id"
     [exchange]="exchange"
