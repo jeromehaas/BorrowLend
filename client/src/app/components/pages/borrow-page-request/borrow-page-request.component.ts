@@ -20,7 +20,6 @@ export class BorrowPageRequestComponent implements OnInit {
   itemToLend: Item;
   userBorr: User;
   user$ = this.store.pipe(select('user'));
-  exchangeStatus?: boolean = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,11 +62,10 @@ export class BorrowPageRequestComponent implements OnInit {
         () => {
           this.userService.getUserById(this.userBorr.id).subscribe((user) => {
             this.store.dispatch(setUser({ user }));
-            this.exchangeStatus = true;
           });
         },
         (error) => {
-          this.exchangeStatus = false;
+          alert('Request already sent');
         }
       );
   }
