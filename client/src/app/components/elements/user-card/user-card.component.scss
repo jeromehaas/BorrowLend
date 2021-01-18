@@ -11,6 +11,12 @@
   justify-content: space-between;
   height: 15rem;
   width: 50rem;
+  transition: linear 0.1s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  }
 }
 
 .bold {
