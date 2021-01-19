@@ -12,8 +12,7 @@
   color: $color-black;
   font-size: 2rem;
   padding: 1rem;
-  border: 1px solid $color-black;
-  border-radius: 1rem;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,6 +29,8 @@
   }
 
   &__size {
+    border: 1px solid $color-black;
+    border-radius: 1rem;
     transition: all 0.8s ease;
     backface-visibility: hidden;
     position: absolute;
@@ -45,7 +46,9 @@
 
   &__back {
     transform: rotateY(180deg);
-    margin-left: 2rem;
+    ul {
+      margin-left: 2rem;
+    }
   }
 }
 

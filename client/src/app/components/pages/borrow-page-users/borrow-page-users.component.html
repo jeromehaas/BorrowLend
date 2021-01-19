@@ -1,5 +1,5 @@
 <div class="borrow-page-users" *ngIf="usersLending">
-  <p *ngIf="usersLending.length === 0">
+  <p class="no-user" *ngIf="usersLending.length === 0">
     No user is lending this game at the moment
   </p>
   <p *ngIf="usersLending.length !== 0">{{ "Users lending " + itemTitle }}</p>
