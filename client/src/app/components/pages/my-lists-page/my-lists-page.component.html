@@ -1,0 +1,18 @@
+<div class="my-lists-page" *ngIf="user">
+  <div class="my-lists-page__list">
+    <p>To Borrow List</p>
+    <app-item-card-search
+      *ngFor="let item of user.toBorrowList"
+      [user]="user"
+      [item]="item"
+    ></app-item-card-search>
+  </div>
+  <div class="my-lists-page__list">
+    <p>To Lend List</p>
+    <app-item-card-search
+      *ngFor="let item of user.toLendList"
+      [user]="user"
+      [item]="item"
+    ></app-item-card-search>
+  </div>
+</div>
