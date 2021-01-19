@@ -10,7 +10,7 @@
         <span> {{ exchange.userBorrowing.location }}</span>
       </div>
       <div class="exchange-card-users__user-email">
-        <span class="bold">Email: </span>
+        <span class="bold">E-mail: </span>
         <span *ngIf="exchange.accepted">
           {{ exchange.userBorrowing.email }}</span
         >
@@ -33,7 +33,7 @@
         <span> {{ exchange.userLending.location }}</span>
       </div>
       <div class="exchange-card-users__user-email">
-        <span class="bold">Email: </span>
+        <span class="bold">E-mail: </span>
         <span *ngIf="exchange.accepted"> {{ exchange.userLending.email }}</span>
         <span *ngIf="!exchange.accepted"> Hidden</span>
       </div>
