@@ -48,6 +48,11 @@ img {
     color: $color-primary;
     display: flex;
     justify-content: space-around;
+
+    p {
+      padding: 1rem;
+    }
+
     button {
       width: 10rem;
       align-self: center;
