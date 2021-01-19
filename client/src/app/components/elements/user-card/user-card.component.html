@@ -31,7 +31,17 @@
         class="user-card__back user-card__size"
       >
         <ul *ngIf="user.toBorrowList.length !== 0">
-          <li *ngFor="let item of user.toBorrowList">{{ item.title }}</li>
+          <li *ngFor="let item of user.toBorrowList">
+            <span>{{ item.title + " " }}</span>
+            <span
+              class="green"
+              *ngIf="loggedUserToLendListIds.includes(item.id)"
+              ><fa-icon [icon]="check"></fa-icon>
+            </span>
+            <span class="red" *ngIf="!loggedUserToLendListIds.includes(item.id)"
+              ><fa-icon [icon]="cross"></fa-icon>
+            </span>
+          </li>
         </ul>
       </div>
     </div>
