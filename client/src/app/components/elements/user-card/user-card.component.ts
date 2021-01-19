@@ -13,6 +13,7 @@ export class UserCardComponent implements OnInit {
   @Input() itemId: number;
   matchingItemsNo: number;
   user$ = this.store.pipe(select('user'));
+  showToBorrowList = false;
 
   constructor(private store: Store<AppState>) {}
 
@@ -25,5 +26,9 @@ export class UserCardComponent implements OnInit {
         this.matchingItemsNo = matchingItems.length;
       }
     });
+  }
+
+  toggleShowToBorrowList(): void {
+    this.showToBorrowList = !this.showToBorrowList;
   }
 }
