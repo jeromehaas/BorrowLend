@@ -38,44 +38,33 @@ export class ItemCardSearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user.toBorrowList.forEach((item) => {
-      if (item.id === this.item.id) {
-        this.itemState = 'toborrow';
-      }
-    });
-    this.user.toLendList.forEach((item) => {
-      if (item.id === this.item.id) {
-        this.itemState = 'tolend';
-      }
-    });
+    if (this.user.toBorrowList.find((item) => item.id === this.item.id)) {
+      this.itemState = 'toborrow';
+    }
+    if (this.user.toLendList.find((item) => item.id === this.item.id)) {
+      this.itemState = 'tolend';
+    }
     if (!this.itemState) {
       this.itemState = 'none';
     }
-    this.user.exchangesBorr.forEach((exchange) => {
-      this.exchangeService
-        .getExchange(exchange.id)
-        .subscribe((exchangeComplete) => {
-          if (
-            exchangeComplete.itemBorrowed.id === this.item.id ||
-            exchangeComplete.itemLent.id === this.item.id
-          ) {
-            this.itemState = 'exchange';
-          }
-        });
-    });
-    this.user.exchangesLend.forEach((exchange) => {
-      this.exchangeService
-        .getExchange(exchange.id)
-        .subscribe((exchangeComplete) => {
-          if (
-            exchangeComplete.itemBorrowed.id === this.item.id ||
-            exchangeComplete.itemLent.id === this.item.id
-          ) {
-            this.itemState = 'exchange';
-          }
-        });
-    });
+    this.user.exchangesBorr.forEach(this.getExchange);
+    this.user.exchangesLend.forEach(this.getExchange);
   }
+
+  getExchange = (exchange): void => {
+    this.exchangeService
+      .getExchange(exchange.id)
+      .subscribe(this.checkIfInExchange);
+  };
+
+  checkIfInExchange = (exchangeComplete): void => {
+    if (
+      exchangeComplete.itemBorrowed.id === this.item.id ||
+      exchangeComplete.itemLent.id === this.item.id
+    ) {
+      this.itemState = 'exchange';
+    }
+  };
 
   onChange(value): void {
     switch (value) {
