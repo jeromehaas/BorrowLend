@@ -68,7 +68,7 @@ describe('ExchangeService', () => {
     req.flush(mock.EXCHANGE_ACCEPTED);
   });
 
-  fit('should edit an exchange to be accepted', () => {
+  fit('should edit an exchange to be rejected', () => {
     service.rejectExchange(2).subscribe((response) => {
       expect(response).toEqual(mock.EXCHANGE_REJECTED);
       expect(response.accepted).toBe(false);

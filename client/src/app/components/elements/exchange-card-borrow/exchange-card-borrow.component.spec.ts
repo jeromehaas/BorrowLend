@@ -19,7 +19,7 @@ describe('ExchangeCardBorrowComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create exchange card component', () => {
     expect(component).toBeTruthy();
   });
 });
