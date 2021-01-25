@@ -38,6 +38,8 @@ fdescribe('CoursesService', () => {
 		service.getUser('2')
 			.subscribe(user => {
 				expect(user).toEqual(mockUser);
+				expect(user.length).toBe(1);
+				expect(user[0].username).toBe('Alba');
 			});
 		const req = httpTestingController.expectOne('http://localhost:3000/users/username/2');
 		expect(req.request.method).toEqual('GET');
@@ -47,17 +49,49 @@ fdescribe('CoursesService', () => {
 	it('Should get a list with all users', () => {
 		service.getAllUsers()
 			.subscribe(users => {
-				console.log(users);
 				expect(users).toEqual(mockUsers);
+				// expect(users.length).toBe(2);
+				expect(users[1].username).toBe('Matthieu')
 			});
 		const req = httpTestingController.expectOne('http://localhost:3000/users');
 		expect(req.request.method).toEqual('GET');
 		req.flush(mockUsers);
 	});
 
+	it('Should get user by username', () => {
+		service.getUser('Alba')
+			.subscribe(user => {
+				expect(user).toEqual(mockUser);
+				expect(user.length).toBe(1);
+				expect(user[0].username).toBe('Alba');
+			});
+		const req = httpTestingController.expectOne('http://localhost:3000/users/username/Alba');
+		expect(req.request.method).toEqual('GET');
+		req.flush(mockUser);
+	})
+
+	it('Should add item to To-Borrow-List', () => {
+
+		let initialLength = mockUser[0].toBorrowList.length;
+		console.log('Initial-length: ', initialLength);
+		console.log(mockUser[0].toBorrowList);
+		
+		
+		service.addToToBorrowList(2, 4)
+			.subscribe(user => {
+				// let elementFound = user.toBorrowList.find(items => items.id === '2');
+				// console.log('ELEMENT FOUND: ', elementFound);
+				console.log('new-length', user[0].toBorrowList.length);
+				console.log(user[0].toBorrowList);
+			});
+		const req = httpTestingController.expectOne('http://localhost:3000/users/toBorrowListAdd/2/4');
+		expect(req.request.method).toEqual('PUT');
+		req.flush(mockUser);
+	})
+})
 
 
 
 
-});
+
 
