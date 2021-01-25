@@ -1,38 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { apiUrl } from './apiUrl';
-import { Exchange } from '../models/exchange';
-import { ExchangeComplete } from '../models/exchange-complete';
 import { ExchangeService } from './exchange.service';
-import { User } from '../models/user';
+import * as mock from './../testMocks/exchangeService';
 
 describe('ExchangeService', () => {
   let service: ExchangeService;
   let httpTestingController: HttpTestingController;
-  let mockExchangeInfo: any;
-  let mockExchange: Exchange;
-  let mockExchangeComplete: any;
   let userUrl = `${apiUrl}/exchanges`;
-
-  // let mockUser1: User = {
-  //   id: 1,
-  //   username: 'Alba',
-  //   password: 'isright',
-  //   location: 'Barcelona',
-  //   email: 'alba.stark@knightswatch.got',
-  //   exchangesBorr: [],
-  //   exchangesLend: [
-  //     {
-  //       id: 1,
-  //       accepted: null,
-  //       isActiveBorr: null,
-  //       isActiveLend: null,
-  //       createdAt: new Date()
-  //     }
-  //   ],
-  //   toLendList: [],
-  //   toBorrowList: []
-  // }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -43,93 +18,6 @@ describe('ExchangeService', () => {
     service = TestBed.inject(ExchangeService);
     httpTestingController = TestBed.inject(HttpTestingController);
 
-    mockExchangeInfo = {
-      userBorrowingId: 1,
-      userLendingId: 2,
-      itemBorrowedId: 1,
-      itemLentId: 2
-    };
-
-    mockExchange = {
-      id: 1,
-      accepted: null,
-      isActiveBorr: null,
-      isActiveLend: null,
-      itemBorrowedId: 5,
-      itemLentId: 4,
-      userBorrowingId: 1,
-      userLendingId: 2,
-      createdAt: new Date()
-    };
-
-    mockExchangeComplete = {
-      userBorrowing: {
-        id: 1,
-        username: 'Alba',
-        password: 'isright',
-        location: 'Barcelona',
-        email: 'alba.stark@knightswatch.got',
-        exchangesBorr: [],
-        exchangesLend: [
-          {
-            id: 1,
-            accepted: null,
-            isActiveBorr: null,
-            isActiveLend: null,
-            createdAt: new Date()
-          }
-        ],
-        toLendList: [],
-        toBorrowList: []
-      },
-      userLending: {
-        id: 2,
-        username: 'Jérôme',
-        password: 'numbersdivisibleby5',
-        location: 'Barcelona',
-        email: 'jerome.climaster@verycool.git',
-        exchangesBorr: [
-          {
-            id: 1,
-            accepted: null,
-            isActiveBorr: null,
-            isActiveLend: null,
-            createdAt: new Date()
-          }
-        ],
-        exchangesLend: [],
-        toLendList: [],
-        toBorrowList: []
-      },
-      itemBorrowed: {
-        id: 1,
-        title: 'PS4 - Cyberpunk 2077',
-        img: 'https://howlongtobeat.com/games/Cyberpunk-2077-2.jpg',
-        exchangesBorr: [],
-        exchangesLend: []
-      },
-      itemLent: {
-        id: 2,
-        title: 'PS4 - The Witcher 3: Wild Hunt',
-        img: 'https://howlongtobeat.com/games/10270_The_Witcher_3_Wild_Hunt.jpg',
-        exchangesBorr: [],
-        exchangesLend: [
-          {
-            id: 1,
-            accepted: null,
-            isActiveBorr: null,
-            isActiveLend: null,
-            createdAt: new Date()
-          }
-        ]
-      },
-      createdAt: new Date(),
-      accepted: null,
-      isActiveBorr: null,
-      isActiveLend: null,
-      id: 2
-    };
-    
   });
 
   fit('should be created', () => {
@@ -137,14 +25,58 @@ describe('ExchangeService', () => {
   });
 
   fit('should create a new exchange and post it to the database', () => {
-    service.createExchange(mockExchangeInfo).subscribe((response) => {
-      expect(response.userBorrowing.id).toEqual(mockExchangeInfo.userBorrowingId);
-      expect(response.userLending.id).toEqual(mockExchangeInfo.userLendingId);
+    service.createExchange(mock.PRE_EXCHANGE).subscribe((response) => {
+      expect(response).toEqual(mock.EXCHANGE_COMPLETE);
+      expect(response.userLending.id).toBe(mock.PRE_EXCHANGE.userLendingId);
+      expect(response.userBorrowing.id).toBe(mock.PRE_EXCHANGE.userBorrowingId);
     });
     expect(service).toBeTruthy();
     const req = httpTestingController.expectOne(userUrl);
     expect(req.request.method).toEqual('POST');
-    req.flush(mockExchangeComplete);
+    req.flush(mock.EXCHANGE_COMPLETE);
+  });
+
+  fit('should get an exchange by id', () => {
+    service.getExchange(2).subscribe((response) => {
+      expect(response).toEqual(mock.EXCHANGE_COMPLETE);
+      expect(response.id).toBe(2);
+    });
+    expect(service).toBeTruthy();
+    const req = httpTestingController.expectOne(`${userUrl}/2`);
+    expect(req.request.method).toEqual('GET');
+    req.flush(mock.EXCHANGE_COMPLETE);
+  });
+
+  fit('should delete an exchange by id', () => {
+    service.deleteExchange(2).subscribe((response) => {
+      expect(response).toEqual({});
+    });
+    expect(service).toBeTruthy();
+    const req = httpTestingController.expectOne(`${userUrl}/2`);
+    expect(req.request.method).toEqual('DELETE');
+    req.flush({});
+  });
+
+  fit('should edit an exchange to be accepted', () => {
+    service.acceptExchange(2).subscribe((response) => {
+      expect(response).toEqual(mock.EXCHANGE_ACCEPTED);
+      expect(response.accepted).toBe(true);
+    });
+    expect(service).toBeTruthy();
+    const req = httpTestingController.expectOne(`${userUrl}/accept/2`);
+    expect(req.request.method).toEqual('PUT');
+    req.flush(mock.EXCHANGE_ACCEPTED);
+  });
+
+  fit('should edit an exchange to be rejected', () => {
+    service.rejectExchange(2).subscribe((response) => {
+      expect(response).toEqual(mock.EXCHANGE_REJECTED);
+      expect(response.accepted).toBe(false);
+    });
+    expect(service).toBeTruthy();
+    const req = httpTestingController.expectOne(`${userUrl}/reject/2`);
+    expect(req.request.method).toEqual('PUT');
+    req.flush(mock.EXCHANGE_REJECTED);
   });
 
 });
