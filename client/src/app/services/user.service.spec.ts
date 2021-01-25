@@ -71,23 +71,16 @@ fdescribe('CoursesService', () => {
 	})
 
 	it('Should add item to To-Borrow-List', () => {
-
 		let initialLength = mockUser[0].toBorrowList.length;
 		console.log('Initial-length: ', initialLength);
 		console.log(mockUser[0].toBorrowList);
-		
-		
 		service.addToToBorrowList(2, 4)
-			.subscribe(user => {
-				// let elementFound = user.toBorrowList.find(items => items.id === '2');
-				// console.log('ELEMENT FOUND: ', elementFound);
-				console.log('new-length', user[0].toBorrowList.length);
-				console.log(user[0].toBorrowList);
-			});
+			.subscribe(user => { });
 		const req = httpTestingController.expectOne('http://localhost:3000/users/toBorrowListAdd/2/4');
 		expect(req.request.method).toEqual('PUT');
 		req.flush(mockUser);
 	})
+
 })
 
 
