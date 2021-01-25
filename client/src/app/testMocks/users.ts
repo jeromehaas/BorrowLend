@@ -1,10 +1,10 @@
 export const USERS = [
 	{
 		"id": 2,
-		"username": "Jerome",
+		"username": "Alba",
 		"password": "1234",
 		"location": "Barcelona",
-		"email": "matthieu@gmail.com",
+		"email": "alba@gmail.com",
 		"exchangesBorr": [],
 		"exchangesLend": [],
 		"toLendList": [

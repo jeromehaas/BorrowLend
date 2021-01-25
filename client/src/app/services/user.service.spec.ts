@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { USER } from '../testMocks/user';
 import { USERS } from '../testMocks/users';
 import { apiUrl } from '../services/apiUrl';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 fdescribe('CoursesService', () => {
 	let httpTestingController: HttpTestingController;
@@ -16,42 +17,46 @@ fdescribe('CoursesService', () => {
 			imports: [HttpClientTestingModule],
 			providers: [UserService]
 		});
-		httpTestingController = TestBed.inject(HttpTestingController);
-		service = TestBed.inject(UserService);
+		httpTestingController = TestBed.get(HttpTestingController);
+		service = TestBed.get(UserService);
 		mockUser = USER;
 		mockUsers = USERS;
 	});
-
+	
 	afterEach(() => {
 		httpTestingController = null
 		service = null;
 		mockUser = null;
 		mockUsers = null;
 	});
-
-	it('The user-service must be created', () => {
-    expect(service).toBeTruthy();
+	
+	it('Should create user-service', () => {
+	  expect(service).toBeTruthy();
+	});
+	
+	it('Should get user by ID', () => {
+		service.getUser('2')
+			.subscribe(user => {
+				expect(user).toEqual(mockUser);
+			});
+		const req = httpTestingController.expectOne('http://localhost:3000/users/username/2');
+		expect(req.request.method).toEqual('GET');
+		req.flush(mockUser);
 	});
 
-	it('The first user in the DB should be "Alba"', () => {
-		service.getAllUsers().subscribe((users) => {
-			expect(users[0][0].username).toEqual('Alba');
-			expect(users[0]).toEqual(mockUser);
-		});
-		const request = httpTestingController.expectOne(`${apiUrl}/users`);
-		request.flush([mockUser]);
-		httpTestingController.verify();
+	it('Should get a list with all users', () => {
+		service.getAllUsers()
+			.subscribe(users => {
+				console.log(users);
+				expect(users).toEqual(mockUsers);
+			});
+		const req = httpTestingController.expectOne('http://localhost:3000/users');
+		expect(req.request.method).toEqual('GET');
+		req.flush(mockUsers);
 	});
 
-	it('Should get "Albe" by ID', () => {
-		service.getUserById(2).subscribe((user) => {
-			console.log(user[0][0]);
-			expect(user[0][0].username).toEqual('Alba');
-		});
-		const request = httpTestingController.expectOne(`${apiUrl}/users/2`);
-		request.flush([mockUser]);
-		httpTestingController.verify();
-	});
+
+
 
 
 });
