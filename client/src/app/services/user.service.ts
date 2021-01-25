@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { apiUrl } from './apiUrl';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +15,13 @@ export class UserService {
 
   getUser(username: string): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/username/${username}`);
-  }
+	}
+
+	getAllUsers(): Observable<User> {
+		return this.http.get<User>(`${this.userUrl}`);
+	}
+
+
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${userId}`);
