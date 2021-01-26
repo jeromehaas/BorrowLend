@@ -6,6 +6,7 @@ import { ExchangeCardLendComponent } from './exchange-card-lend.component';
 import { Store } from '@ngrx/store';
 import { UserService } from 'src/app/services/user.service';
 import { EXCHANGE_COMPLETE } from 'src/app/testMocks/exchangeService';
+import { of } from 'rxjs';
 
 
 describe('ExchangeCardLendComponent', () => {
@@ -20,9 +21,12 @@ describe('ExchangeCardLendComponent', () => {
     mockExchangeService = jasmine.createSpyObj([
       'deleteExchange', 'endExchange', 'acceptExchange', 'rejectExchange'
     ]);
-
     mockUserService = jasmine.createSpyObj(['getUserById']);
-    mockUserService.getUserById.and.returnValue([]);
+    mockStore = jasmine.createSpyObj(['dispatch']);
+
+    mockExchangeService.rejectExchange.and.returnValue(of(null));
+    mockUserService.getUserById.and.returnValue(of({}));
+    mockStore.dispatch.and.returnValue(() => {});
     
     await TestBed.configureTestingModule({
       declarations: [ ExchangeCardLendComponent ],
@@ -60,7 +64,7 @@ describe('ExchangeCardLendComponent', () => {
     tick();
     expect(mockExchangeService.rejectExchange).toHaveBeenCalledWith(component.exchange.id);
     // tick();
-    // expect(mockUserService.getUserById).toHaveBeenCalled()
+    expect(mockUserService.getUserById).toHaveBeenCalled()
   }));
 
   
