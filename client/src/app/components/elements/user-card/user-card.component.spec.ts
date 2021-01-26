@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserCardComponent } from './user-card.component';
 
-describe('UserCardComponent', () => {
+fdescribe('UserCardComponent', () => {
+
   let component: UserCardComponent;
   let fixture: ComponentFixture<UserCardComponent>;
 
@@ -10,8 +11,18 @@ describe('UserCardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ UserCardComponent ]
     })
-    .compileComponents();
-  });
+			.compileComponents()
+			.then(() => {
+				fixture = TestBed.createComponent(UserCardComponent);
+				component = fixture.componentInstance;
+			});
+
+	});
+
+	it('Should create the component', () => {
+		expect(component).toBeTruthy();
+		console.log(component);
+	})
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserCardComponent);
