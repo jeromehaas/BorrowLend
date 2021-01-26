@@ -62,6 +62,7 @@
     {{ "Ended by " + exchange.userBorrowing.username }}
   </div>
   <button
+    class="deletebutton"
     (click)="deleteExchange()"
     *ngIf="exchange.accepted && exchange.isActiveBorr === false"
   >
