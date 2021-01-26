@@ -65,15 +65,17 @@
     }}
   </div>
   <button
+    class="deletebutton"
     (click)="deleteExchange()"
     *ngIf="
-      !exchange.accepted ||
-      (exchange.accepted && exchange.isActiveLend === false)
+    !exchange.accepted ||
+    (exchange.accepted && exchange.isActiveLend === false)
     "
-  >
+    >
     Delete
   </button>
   <button
+    class="endbuttontest"
     (click)="endExchange()"
     *ngIf="
       exchange.accepted &&
