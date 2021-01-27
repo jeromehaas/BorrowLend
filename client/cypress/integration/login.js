@@ -14,7 +14,4 @@ describe('login', () => {
 		cy.location('pathname').should('eq', '/search');
 	})
 
-
-
-
 })
