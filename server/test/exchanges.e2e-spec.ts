@@ -1,15 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+// import { Test, TestingModule } from '@nestjs/testing';
+// import { INestApplication, Logger } from '@nestjs/common';
+// import * as request from 'supertest';
 // import { AppModule } from './../src/app.module';
-import { ExchangesModule } from './../src/exchanges/exchanges.module';
-import { ExchangesService } from './../src/exchanges/exchanges.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ExchangesController } from './../src/exchanges/exchanges.controller';
+// import { ExchangesModule } from './../src/exchanges/exchanges.module';
+// import { ExchangesService } from './../src/exchanges/exchanges.service';
+// import { TypeOrmModule } from '@nestjs/typeorm';
+// import { ExchangesController } from './../src/exchanges/exchanges.controller';
 // import { Exchanges } from './../src/exchanges/exchange.entity';
-import { Users } from './../src/users/user.entity';
-import { Items } from './../src/items/item.entity';
-import { MockExchanges } from './mockExchangeEntity';
+// import { Users } from './../src/users/user.entity';
+// import { Items } from './../src/items/item.entity';
+// // import { MockExchanges } from './mockExchangeEntity';
 
 // @Module({
 //   imports: [
@@ -21,60 +21,45 @@ import { MockExchanges } from './mockExchangeEntity';
 //   controllers: [ExchangesController],
 // })
 
-// @Module({
-//   providers: [
-//     exchangesService,
-//     {
-//       // provide: getRepositoryToken(User),
-//       useValue: mockRepository
-//     },
-//   ],
-// })
+// // @Module({
+// //   providers: [
+// //     exchangesService,
+// //     {
+// //       provide: getRepositoryToken(User),
+// //       useValue: mockRepository
+// //     },
+// //   ],
+// // })
 
-describe('Exchanges', () => {
-  let app: INestApplication;
-  let exchangesService = { findAll: () => ['test'] };
+// describe('Exchanges', () => {
+//   let app: INestApplication;
+//   let exchangesService = { findAll: () => ['test'] };
 
-  beforeAll(async () => {
-    try {
-      const moduleRef = await Test.createTestingModule({
-        // imports: [ExchangesModule],
-        providers: [
-          {
-            provide: ExchangesService,
-            useValue: {
-              get: jest.fn(() => MockExchanges)
-            }
-          }
-        ]
-      })
-      // .overrideProvider(ExchangesService)
-      // .useValue(exchangesService)
-      .compile();
-      exchangesService = moduleRef.get(ExchangesService)
-  
-      console.log(moduleRef.createNestApplication, 'module ref')
-      // app = await moduleRef.createNestApplication();
-    } catch (e) {
-      console.log(e)
-    }
+//   beforeAll(async () => {
+//     const moduleRef = await Test.createTestingModule({
+//       imports: [ExchangesModule],
+//     })
+//     .overrideProvider(ExchangesService)
+//     .useValue(exchangesService)
+//     .compile();
+//     console.log('HERE')
 
-    // await app.init();
+//     app = await moduleRef.createNestApplication();
 
-  });
+//     await app.init();
 
-  it('/ (GET)', () => {
-    console.log('exchanges ', exchangesService)
-    expect(true).toEqual(true);
-    // return request(exchangesService)
-    //   // .get('/')
-    //   // .expect(200)
-    //   .expect({
-    //     data: exchangesService.findAll()
-    //   });
-  });
+//   });
 
-  afterAll(async () => {
-    await app.close();
-  });
-});
+//   it('/ (GET)', () => {
+//     return request(app.getHttpServer())
+//       .get('/')
+//       .expect(200)
+//       .expect({
+//         data: exchangesService.findAll()
+//       });
+//   });
+
+//   afterAll(async () => {
+//     await app.close();
+//   });
+// });
