@@ -6,7 +6,7 @@ import { USERS } from '../testMocks/users';
 import { apiUrl } from '../services/apiUrl';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
-fdescribe('CoursesService', () => {
+fdescribe('UsersService', () => {
 	let httpTestingController: HttpTestingController;
 	let service: UserService;
 	let mockUser: any;
