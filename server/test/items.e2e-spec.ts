@@ -10,7 +10,7 @@ import { Users } from '../src/users/user.entity';
 
 describe('Exchanges', () => {
   let app: INestApplication;
-  let itemsService = { findAll: () => ['test'] };
+  let itemsService = { findAll: () =>  };
 
   beforeAll(async () => {
 
@@ -40,7 +40,7 @@ describe('Exchanges', () => {
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/items')
       .expect(200)
       .expect({
         data:itemsService.findAll()
